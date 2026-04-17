@@ -1,0 +1,160 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: black;
+  color: white;
+  overflow: hidden;
+}
+
+.hidden { display: none; }
+
+/* INTRO */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+}
+
+button {
+  padding: 12px 20px;
+  background: red;
+  border: none;
+  border-radius: 30px;
+  color: white;
+}
+
+/* CINEMATIC INTRO */
+#cinematicIntro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+#cinText {
+  font-size: 40px;
+  animation: fadeZoom 4s forwards;
+}
+
+@keyframes fadeZoom {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0; }
+}
+
+/* PARTICLES */
+#particles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* SLIDER */
+.slider {
+  width: 100%;
+  height: 60vh;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: zoom 6s infinite;
+}
+
+.slide.active { opacity: 1; }
+
+@keyframes zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+/* SCROLL TEXT */
+.scroll {
+  height: 40vh;
+  overflow: hidden;
+}
+
+#scrollText {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 2;
+  animation: scrollUp 25s linear forwards;
+  text-shadow: 0 0 10px pink;
+}
+
+@keyframes scrollUp {
+  0% { top: 100%; opacity: 0; }
+  10% { opacity: 1; }
+  100% { top: -120%; opacity: 0; }
+}
+
+/* GIFT */
+#giftBox {
+  text-align: center;
+  font-size: 80px;
+  margin-top: 20px;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  50% { transform: translateY(-15px); }
+}
+
+/* CINEMATIC REVEAL */
+#cinematicReveal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  z-index: 50;
+  transition: opacity 2s;
+}
+
+#cinematicReveal.show {
+  opacity: 1;
+}
+
+#revealImg {
+  width: 80%;
+  max-height: 60vh;
+  border-radius: 20px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 2s;
+}
+
+#revealImg.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#revealText {
+  margin-top: 20px;
+  font-size: 22px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 2s;
+}
