@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Mamma ❤️</title>
 
-<meta name="theme-color" content="#000000">
+<!-- Google Font (handwriting) -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- START -->
@@ -16,49 +17,34 @@
   <h1 id="startText">Something special is waiting for you Mamma ❤️</h1>
 </div>
 
-<!-- TAP AREA -->
-<div id="tapArea" class="hidden"></div>
-
-<!-- GIFT -->
+<!-- 3D GIFT -->
 <div id="giftBox" class="hidden">
-  <div class="gift">
+  <div class="box">
     <div class="lid"></div>
-    <div class="box"></div>
+    <div class="body"></div>
   </div>
 </div>
 
 <!-- MAIN -->
 <div id="main" class="hidden">
 
-  <audio id="bgMusic" loop preload="auto">
+  <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mp3">
   </audio>
 
-  <audio id="voiceNote" preload="auto">
-    <source src="voice.mp3" type="audio/mp3">
-  </audio>
-
-  <!-- SLIDER (FIXED PATHS ✔️) -->
+  <!-- SLIDER -->
   <div class="slider">
-    <img src="photos/1.jpg" class="slide active">
-    <img src="photos/2.jpg" class="slide">
-    <img src="photos/3.jpg" class="slide">
+    <img src="1.jpg" class="slide active">
+    <img src="2.jpg" class="slide">
+    <img src="3.jpg" class="slide">
+
+    <!-- QUOTE INSIDE IMAGE -->
+    <div id="quoteBox"></div>
   </div>
 
-  <!-- QUOTE -->
-  <div id="quoteBox"></div>
-
 </div>
 
-<!-- FINAL MESSAGE -->
-<div id="finalMessage" class="hidden">
-  HAPPY BIRTHDAY MAMMA 🎂❤️<br>I LOVE YOU FOREVER
-</div>
-
-<!-- FIREWORKS -->
 <canvas id="fireworks"></canvas>
-
-<!-- FADE -->
 <div id="fadeScreen"></div>
 
 <script src="script.js"></script>
