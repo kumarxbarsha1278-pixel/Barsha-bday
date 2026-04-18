@@ -1,126 +1,123 @@
-/* SHOW GIFT AFTER INTRO */
+let started = false;
+
+/* SHOW GIFT */
 setTimeout(() => {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("giftBox").classList.remove("hidden");
+  document.getElementById("tapArea").classList.remove("hidden");
 }, 4000);
 
-/* CLICK GIFT */
-document.getElementById("giftBox").onclick = () => {
+/* UNIVERSAL TAP (SCREEN + GIFT) */
+document.getElementById("tapArea").onclick = triggerStart;
+document.getElementById("giftBox").onclick = triggerStart;
 
-  // 📳 vibration on tap
-  if (navigator.vibrate) {
-    navigator.vibrate([100, 50, 100]);
-  }
+function triggerStart() {
+  if (started) return;
+  started = true;
 
+  if (navigator.vibrate) navigator.vibrate(100);
+
+  document.getElementById("tapArea").style.display = "none";
   document.getElementById("giftBox").innerHTML = "💥";
 
   setTimeout(() => {
     document.getElementById("giftBox").style.display = "none";
     startMain();
   }, 500);
-};
+}
 
-/* START MAIN */
+/* MAIN */
 function startMain() {
   document.getElementById("main").classList.remove("hidden");
 
   let music = document.getElementById("bgMusic");
-  music.volume = 0.7;
   music.play().catch(()=>{});
 
   startSlider();
-  createHearts();
+  hearts();
 
-  setTimeout(startFinalMoment, 18000);
+  setTimeout(finalMoment, 15000);
 }
 
-/* TYPEWRITER */
-function typeWriter(text, element, speed = 40) {
-  element.innerHTML = "";
-  let i = 0;
-
-  function typing() {
-    if (i < text.length) {
-      element.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, speed);
-    }
-  }
-  typing();
-}
-
-/* SLIDER + QUOTES */
-let current = 0;
-
-const quotes = [
-  "Happy Birthday Mamma 🎂❤️",
-  "Barsha… you are my peace 💖",
-  "Every moment with you feels like magic ✨",
-  "I don’t need anything… just you 😊",
-  "I love you more than anything ❤️"
+/* SLIDER */
+let i=0;
+const quotes=[
+ "Happy Birthday Mamma 🎂❤️",
+ "You are my everything 💖",
+ "I love you forever ❤️"
 ];
 
-function startSlider() {
-  let slides = document.querySelectorAll(".slide");
-  let quoteBox = document.getElementById("quoteBox");
+function startSlider(){
+ let slides=document.querySelectorAll(".slide");
+ let q=document.getElementById("quoteBox");
 
-  typeWriter(quotes[0], quoteBox);
+ q.innerText=quotes[0];
 
-  setInterval(() => {
-    slides[current].classList.remove("active");
-    current = (current + 1) % slides.length;
-    slides[current].classList.add("active");
-
-    setTimeout(() => {
-      typeWriter(quotes[current], quoteBox);
-    }, 500);
-
-  }, 3000);
+ setInterval(()=>{
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
+  q.innerText=quotes[i%quotes.length];
+ },3000);
 }
 
 /* HEARTS */
-function createHearts() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
-  }, 300);
+function hearts(){
+ setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+ },300);
 }
 
-/* FINAL CINEMATIC */
-function startFinalMoment() {
+/* FIREWORK */
+let canvas=document.getElementById("fireworks");
+let ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 
-  // 📳 vibration again
-  if (navigator.vibrate) {
-    navigator.vibrate([200, 100, 200]);
+let particles=[];
+
+function boom(x,y){
+ for(let j=0;j<50;j++){
+  particles.push({
+    x,y,
+    dx:(Math.random()-0.5)*5,
+    dy:(Math.random()-0.5)*5,
+    life:50
+  });
+ }
+}
+
+function draw(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ particles.forEach((p,k)=>{
+  ctx.fillRect(p.x,p.y,2,2);
+  p.x+=p.dx;
+  p.y+=p.dy;
+  p.life--;
+  if(p.life<=0) particles.splice(k,1);
+ });
+ requestAnimationFrame(draw);
+}
+draw();
+
+/* FINAL */
+function finalMoment(){
+ document.getElementById("fadeScreen").classList.add("show");
+
+ setTimeout(()=>{
+  document.getElementById("fadeScreen").classList.remove("show");
+
+  for(let k=0;k<5;k++){
+    setTimeout(()=>boom(Math.random()*innerWidth,Math.random()*innerHeight/2),k*300);
   }
 
-  let fade = document.getElementById("fadeScreen");
-  let music = document.getElementById("bgMusic");
-  let quoteBox = document.getElementById("quoteBox");
+  document.getElementById("quoteBox").innerText =
+    "HAPPY BIRTHDAY MAMMA 🎂❤️ I LOVE YOU FOREVER";
 
-  fade.classList.add("show");
-
-  let v = music.volume;
-  let fadeOut = setInterval(() => {
-    if (v > 0.1) {
-      v -= 0.05;
-      music.volume = v;
-    } else clearInterval(fadeOut);
-  }, 200);
-
-  setTimeout(() => {
-    fade.classList.remove("show");
-
-    typeWriter(
-      "HAPPY BIRTHDAY MAMMA 🎂❤️ I LOVE YOU FOREVER",
-      quoteBox,
-      60
-    );
-
-  }, 4000);
+ },3000);
 }
