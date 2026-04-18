@@ -27,14 +27,15 @@ function startMain() {
   music.play().catch(()=>{});
 
   startSlider();
+  createHearts(); // ❤️ KEEP HEARTS
 }
 
 /* SLIDER */
 let i = 0;
 
 const quotes = [
-  "Happy Birthday Mamma 🎂❤️",
-  "Mamma… you are my everything 💖",
+  "You are my everything 💖",
+  "Every moment with you feels magical ✨",
   "I love you forever ❤️"
 ];
 
@@ -42,7 +43,7 @@ function startSlider() {
   let slides = document.querySelectorAll(".slide");
   let q = document.getElementById("quoteBox");
 
-  q.innerText = quotes[0];
+  q.innerText = "Happy Birthday Mamma 🎂❤️";
 
   setInterval(() => {
     slides[i].classList.remove("active");
@@ -52,4 +53,17 @@ function startSlider() {
     q.innerText = quotes[i % quotes.length];
 
   }, 3000);
+}
+
+/* ❤️ FLOATING HEARTS */
+function createHearts() {
+  setInterval(() => {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+
+    setTimeout(() => h.remove(), 4000);
+  }, 300);
 }
