@@ -10,22 +10,23 @@
 </head>
 <body>
 
+<!-- INTRO -->
 <div id="startScreen">
-  <h1 id="startText">Something special is waiting for you Mamma ❤️</h1>
+  <h1>Something special is waiting for you Mamma ❤️</h1>
 </div>
 
-<!-- 🎁 GIFT -->
-<div id="giftBox" class="hidden">
-  <div class="gift">
-    <div class="lid"></div>
-    <div class="box"></div>
+<!-- GIFT -->
+<div id="giftContainer" class="hidden">
 
-    <!-- Ribbons -->
-    <div class="ribbon-vertical"></div>
-    <div class="ribbon-horizontal"></div>
+  <img src="gift.png" id="giftImg">
+
+  <div id="tapText">
+    Don’t wait… tap the heart below <span class="heartPulse">🤍</span>
   </div>
+
 </div>
 
+<!-- MAIN -->
 <div id="main" class="hidden">
 
   <audio id="bgMusic" loop>
@@ -41,9 +42,6 @@
   </div>
 
 </div>
-
-<canvas id="fireworks"></canvas>
-<div id="fadeScreen"></div>
 
 <script src="script.js"></script>
 </body>
