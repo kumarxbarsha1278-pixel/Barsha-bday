@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Mamma ❤️</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mamma ❤️</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-  <h1>For You, Mamma ❤️</h1>
-  <button id="startBtn">Tap to Begin ❤️</button>
+<!-- START -->
+<div id="startScreen">
+  <h1 id="startText">Something special is waiting for you Mamma ❤️</h1>
 </div>
+
+<!-- GIFT -->
+<div id="giftBox" class="hidden">🎁</div>
 
 <!-- MAIN -->
 <div id="main" class="hidden">
 
-  <audio id="bgMusic">
+  <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mp3">
   </audio>
-
-  <h1 class="title">Happy Birthday Mamma 🎂</h1>
 
   <!-- SLIDER -->
   <div class="slider">
@@ -30,30 +30,16 @@
     <img src="3.jpg" class="slide">
   </div>
 
-  <!-- SCROLL TEXT -->
-  <div id="scrollContainer" class="scroll hidden">
-    <div id="scrollText">
-      My love, you deserve all the happiness in the world ❤️  
-      Happy birthday to my everything 💖  
-      Every day with you is special ✨  
-      I LOVE YOU MAMMA ❤️
-    </div>
-  </div>
-
-  <!-- SPECIAL -->
-  <div id="specialLine" class="hidden">
-    Something special is waiting for you Mamma... 🎁
-  </div>
-
-  <div id="giftBox" class="hidden">🎁</div>
+  <!-- QUOTES -->
+  <div id="quoteBox"></div>
 
 </div>
 
-<!-- FINAL REVEAL -->
-<div id="cinematicReveal" class="hidden">
-  <img src="1.jpg" id="revealImg">
-  <div id="revealText"></div>
-</div>
+<!-- CANVAS FIREWORK -->
+<canvas id="fireworks"></canvas>
+
+<!-- FADE -->
+<div id="fadeScreen"></div>
 
 <script src="script.js"></script>
 </body>
