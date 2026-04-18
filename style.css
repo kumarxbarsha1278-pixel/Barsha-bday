@@ -53,7 +53,6 @@ body {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1s;
 }
 
 .slide.active {
@@ -82,16 +81,6 @@ body {
 @keyframes floatUp {
   from { transform: translateY(0); opacity: 1; }
   to { transform: translateY(-100vh); opacity: 0; }
-}
-
-/* FIREWORK */
-#fireworks {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
 }
 
 /* FADE */
