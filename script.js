@@ -22,43 +22,43 @@ setTimeout(() => {
 }, 4000);
 
 /* TAP */
-if(tapArea) tapArea.onclick = triggerStart;
-if(giftBox) giftBox.onclick = triggerStart;
+if(tapArea) tapArea.addEventListener("click", triggerStart);
+if(giftBox) giftBox.addEventListener("click", triggerStart);
 
 function triggerStart() {
   if (started) return;
   started = true;
 
   let gift = document.querySelector(".gift");
-  if(gift) gift.classList.add("open");
+  if (gift) gift.classList.add("open");
 
-  if(tapArea) tapArea.style.display = "none";
+  if (tapArea) tapArea.style.display = "none";
 
   setTimeout(() => {
-    if(giftBox) giftBox.style.display = "none";
+    if (giftBox) giftBox.style.display = "none";
     startMain();
   }, 600);
 }
 
 /* MAIN */
 function startMain() {
-  if(main){
+  if (main) {
     main.classList.remove("hidden");
-    setTimeout(()=>main.classList.add("show"),100);
+    setTimeout(() => main.classList.add("show"), 100);
   }
 
-  if(bgMusic) bgMusic.play().catch(()=>{});
+  if (bgMusic) bgMusic.play().catch(() => {});
 
   startSlider();
   hearts();
-  beat();
+  beatSync();
 
   setTimeout(finalMoment, 15000);
 }
 
-/* TYPING */
+/* TYPE TEXT */
 function typeText(el, text) {
-  if(!el) return;
+  if (!el) return;
   el.innerText = "";
   let i = 0;
 
@@ -72,9 +72,9 @@ function typeText(el, text) {
 /* SLIDER */
 let i = 0;
 let quotes = [
- "Happy Birthday Mamma 🎂❤️",
- "You are my everything 💖",
- "I love you forever ❤️"
+  "Happy Birthday Mamma 🎂❤️",
+  "You are my everything 💖",
+  "I love you forever ❤️"
 ];
 
 function startSlider() {
@@ -83,7 +83,7 @@ function startSlider() {
   typeText(quoteBox, quotes[0]);
 
   setInterval(() => {
-    if(slides.length === 0) return;
+    if (slides.length === 0) return;
 
     slides[i].classList.remove("active");
     i = (i + 1) % slides.length;
@@ -100,21 +100,20 @@ function hearts() {
     h.className = "heart";
     h.innerHTML = "❤️";
     h.style.left = Math.random() * 100 + "vw";
-    h.style.fontSize = (Math.random() * 20 + 10) + "px";
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 4000);
   }, 300);
 }
 
 /* BEAT */
-function beat(){
-  setInterval(()=>{
+function beatSync() {
+  setInterval(() => {
     document.body.classList.add("beat");
-    setTimeout(()=>document.body.classList.remove("beat"),200);
-  },600);
+    setTimeout(() => document.body.classList.remove("beat"), 200);
+  }, 600);
 }
 
-/* FIREWORK */
+/* FIREWORKS */
 let ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -128,19 +127,19 @@ function boom(x, y) {
       dx: (Math.random() - 0.5) * 5,
       dy: (Math.random() - 0.5) * 5,
       life: 50,
-      color: `hsl(${Math.random()*360},100%,50%)`
+      color: `hsl(${Math.random() * 360},100%,50%)`
     });
   }
 }
 
 function draw() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   particles = particles.filter(p => p.life > 0);
 
   particles.forEach(p => {
     ctx.fillStyle = p.color;
-    ctx.fillRect(p.x,p.y,2,2);
+    ctx.fillRect(p.x, p.y, 2, 2);
     p.x += p.dx;
     p.y += p.dy;
     p.life--;
@@ -152,21 +151,24 @@ draw();
 
 /* FINAL */
 function finalMoment() {
-  if(fadeScreen) fadeScreen.classList.add("show");
+  if (fadeScreen) fadeScreen.classList.add("show");
 
   setTimeout(() => {
-    if(fadeScreen) fadeScreen.classList.remove("show");
+    if (fadeScreen) fadeScreen.classList.remove("show");
 
     for (let k = 0; k < 5; k++) {
-      setTimeout(() => boom(Math.random()*innerWidth, Math.random()*innerHeight/2), k*300);
+      setTimeout(() =>
+        boom(Math.random() * innerWidth, Math.random() * innerHeight / 2),
+        k * 300
+      );
     }
 
-    if(finalMessage){
+    if (finalMessage) {
       finalMessage.classList.remove("hidden");
-      setTimeout(()=>finalMessage.classList.add("show"),100);
+      setTimeout(() => finalMessage.classList.add("show"), 100);
     }
 
-    if(voiceNote) voiceNote.play().catch(()=>{});
+    if (voiceNote) voiceNote.play().catch(() => {});
 
   }, 3000);
 }
