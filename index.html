@@ -4,8 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Mamma ❤️</title>
+
+<meta name="theme-color" content="#000000">
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <!-- START -->
@@ -13,17 +16,25 @@
   <h1 id="startText">Something special is waiting for you Mamma ❤️</h1>
 </div>
 
+<!-- TAP AREA -->
+<div id="tapArea" class="hidden"></div>
+
 <!-- GIFT -->
-<div id="giftBox" class="hidden">🎁</div>
+<div id="giftBox" class="hidden">
+  <div class="gift">
+    <div class="lid"></div>
+    <div class="box"></div>
+  </div>
+</div>
 
 <!-- MAIN -->
 <div id="main" class="hidden">
 
-  <audio id="bgMusic" loop>
+  <audio id="bgMusic" loop preload="auto">
     <source src="music.mp3" type="audio/mp3">
   </audio>
 
-  <audio id="voiceNote">
+  <audio id="voiceNote" preload="auto">
     <source src="voice.mp3" type="audio/mp3">
   </audio>
 
@@ -34,12 +45,20 @@
     <img src="3.jpg" class="slide">
   </div>
 
-  <!-- QUOTES -->
+  <!-- QUOTE -->
   <div id="quoteBox"></div>
 
 </div>
 
-<!-- FADE SCREEN -->
+<!-- FINAL MESSAGE -->
+<div id="finalMessage" class="hidden">
+  HAPPY BIRTHDAY MAMMA 🎂❤️<br>I LOVE YOU FOREVER
+</div>
+
+<!-- FIREWORKS -->
+<canvas id="fireworks"></canvas>
+
+<!-- FADE -->
 <div id="fadeScreen"></div>
 
 <script src="script.js"></script>
