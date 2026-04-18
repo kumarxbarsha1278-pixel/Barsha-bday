@@ -15,7 +15,11 @@ function startExperience() {
 
   if (navigator.vibrate) navigator.vibrate(100);
 
+  // ❌ REMOVE TOP LINE AFTER CLICK
+  document.getElementById("giftTopLine").style.display = "none";
+
   document.getElementById("giftContainer").style.display = "none";
+
   startMain();
 }
 
@@ -27,7 +31,7 @@ function startMain() {
   music.play().catch(()=>{});
 
   startSlider();
-  createHearts(); // ❤️ KEEP HEARTS
+  createHearts();
 }
 
 /* SLIDER */
@@ -52,18 +56,18 @@ function startSlider() {
 
     q.innerText = quotes[i % quotes.length];
 
-  }, 3000);
+  }, 3500);
 }
 
-/* ❤️ FLOATING HEARTS */
+/* FLOATING HEARTS */
 function createHearts() {
   setInterval(() => {
     let h = document.createElement("div");
     h.className = "heart";
     h.innerHTML = "❤️";
     h.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(h);
 
+    document.body.appendChild(h);
     setTimeout(() => h.remove(), 4000);
   }, 300);
 }
