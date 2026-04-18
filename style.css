@@ -4,7 +4,6 @@ body {
   color: white;
   font-family: sans-serif;
   overflow: hidden;
-  -webkit-tap-highlight-color: transparent;
 }
 
 .hidden { display: none; }
@@ -20,15 +19,9 @@ body {
 #startText {
   font-size: clamp(18px,5vw,26px);
   text-align: center;
-  animation: fadeIn 3s forwards;
 }
 
-@keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
-}
-
-/* TAP AREA */
+/* TAP */
 #tapArea {
   position: fixed;
   width: 100%;
@@ -95,7 +88,7 @@ body {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1s;
+  transition: 1s;
 }
 
 .slide.active {
@@ -109,10 +102,10 @@ body {
   width: 100%;
   text-align: center;
   font-size: clamp(16px,4vw,22px);
-  text-shadow: 0 0 20px pink, 0 0 40px red;
+  text-shadow: 0 0 20px pink;
 }
 
-/* HEART */
+/* HEARTS */
 .heart {
   position: fixed;
   bottom: 0;
@@ -140,7 +133,6 @@ body {
   background: black;
   opacity: 0;
   transition: 2s;
-  z-index: 100;
 }
 
 #fadeScreen.show {
@@ -153,8 +145,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  text-align: center;
   font-size: 26px;
+  text-align: center;
   opacity: 0;
   transition: 1s;
   z-index: 200;
