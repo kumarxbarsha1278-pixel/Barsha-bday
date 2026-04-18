@@ -1,47 +1,62 @@
+window.onload = function () {
+
 let started = false;
 
 /* SHOW GIFT */
-setTimeout(() => {
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("giftBox").classList.remove("hidden");
-  document.getElementById("tapArea").classList.remove("hidden");
-}, 4000);
+setTimeout(()=>{
+  startScreen.style.display="none";
+  giftBox.classList.remove("hidden");
+  tapArea.classList.remove("hidden");
+},4000);
 
-/* UNIVERSAL TAP (SCREEN + GIFT) */
-document.getElementById("tapArea").onclick = triggerStart;
-document.getElementById("giftBox").onclick = triggerStart;
+/* TAP */
+tapArea.onclick = triggerStart;
+giftBox.onclick = triggerStart;
 
-function triggerStart() {
-  if (started) return;
-  started = true;
+function triggerStart(){
+ if(started) return;
+ started=true;
 
-  if (navigator.vibrate) navigator.vibrate(100);
+ let gift=document.querySelector(".gift");
+ gift.classList.add("open");
 
-  document.getElementById("tapArea").style.display = "none";
-  document.getElementById("giftBox").innerHTML = "💥";
+ tapArea.style.display="none";
 
-  setTimeout(() => {
-    document.getElementById("giftBox").style.display = "none";
-    startMain();
-  }, 500);
+ setTimeout(()=>{
+   giftBox.style.display="none";
+   startMain();
+ },600);
 }
 
 /* MAIN */
-function startMain() {
-  document.getElementById("main").classList.remove("hidden");
+function startMain(){
+ main.classList.remove("hidden");
 
-  let music = document.getElementById("bgMusic");
-  music.play().catch(()=>{});
+ setTimeout(()=>main.classList.add("show"),100);
 
-  startSlider();
-  hearts();
+ bgMusic.play().catch(()=>{});
 
-  setTimeout(finalMoment, 15000);
+ startSlider();
+ hearts();
+ beatSync();
+
+ setTimeout(finalMoment,15000);
+}
+
+/* TYPING */
+function typeText(el,text,speed=40){
+ el.innerText="";
+ let i=0;
+ let t=setInterval(()=>{
+   el.innerText+=text[i];
+   i++;
+   if(i>=text.length) clearInterval(t);
+ },speed);
 }
 
 /* SLIDER */
 let i=0;
-const quotes=[
+let quotes=[
  "Happy Birthday Mamma 🎂❤️",
  "You are my everything 💖",
  "I love you forever ❤️"
@@ -49,15 +64,17 @@ const quotes=[
 
 function startSlider(){
  let slides=document.querySelectorAll(".slide");
- let q=document.getElementById("quoteBox");
+ let q=quoteBox;
 
- q.innerText=quotes[0];
+ typeText(q,quotes[0]);
 
  setInterval(()=>{
   slides[i].classList.remove("active");
   i=(i+1)%slides.length;
   slides[i].classList.add("active");
-  q.innerText=quotes[i%quotes.length];
+
+  typeText(q,quotes[i%quotes.length]);
+
  },3000);
 }
 
@@ -68,56 +85,79 @@ function hearts(){
   h.className="heart";
   h.innerHTML="❤️";
   h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(Math.random()*20+10)+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),4000);
  },300);
 }
 
+/* BEAT */
+function beatSync(){
+ setInterval(()=>{
+  document.body.classList.add("beat");
+  setTimeout(()=>document.body.classList.remove("beat"),200);
+ },600);
+}
+
 /* FIREWORK */
-let canvas=document.getElementById("fireworks");
+let canvas=fireworks;
 let ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
+
+function resize(){
+ canvas.width=innerWidth;
+ canvas.height=innerHeight;
+}
+resize();
+window.onresize=resize;
 
 let particles=[];
 
 function boom(x,y){
  for(let j=0;j<50;j++){
   particles.push({
-    x,y,
-    dx:(Math.random()-0.5)*5,
-    dy:(Math.random()-0.5)*5,
-    life:50
+   x,y,
+   dx:(Math.random()-0.5)*5,
+   dy:(Math.random()-0.5)*5,
+   life:50,
+   color:`hsl(${Math.random()*360},100%,50%)`
   });
  }
 }
 
 function draw(){
  ctx.clearRect(0,0,canvas.width,canvas.height);
- particles.forEach((p,k)=>{
+
+ particles=particles.filter(p=>p.life>0);
+
+ particles.forEach(p=>{
+  ctx.fillStyle=p.color;
   ctx.fillRect(p.x,p.y,2,2);
   p.x+=p.dx;
   p.y+=p.dy;
   p.life--;
-  if(p.life<=0) particles.splice(k,1);
  });
+
  requestAnimationFrame(draw);
 }
 draw();
 
 /* FINAL */
 function finalMoment(){
- document.getElementById("fadeScreen").classList.add("show");
+ fadeScreen.classList.add("show");
 
  setTimeout(()=>{
-  document.getElementById("fadeScreen").classList.remove("show");
+  fadeScreen.classList.remove("show");
 
   for(let k=0;k<5;k++){
-    setTimeout(()=>boom(Math.random()*innerWidth,Math.random()*innerHeight/2),k*300);
+   setTimeout(()=>boom(Math.random()*innerWidth,Math.random()*innerHeight/2),k*300);
   }
 
-  document.getElementById("quoteBox").innerText =
-    "HAPPY BIRTHDAY MAMMA 🎂❤️ I LOVE YOU FOREVER";
+  finalMessage.classList.remove("hidden");
+  setTimeout(()=>finalMessage.classList.add("show"),100);
+
+  voiceNote.play().catch(()=>{});
 
  },3000);
 }
+
+};
