@@ -1,123 +1,147 @@
 body {
-  margin: 0;
-  background: black;
-  color: white;
-  font-family: sans-serif;
-  overflow: hidden;
+  margin:0;
+  background:black;
+  color:white;
+  overflow:hidden;
 }
 
-.hidden { display: none; }
+.hidden{display:none;}
 
-/* START */
-#startScreen {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#startScreen{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-#startText {
-  font-size: 22px;
-  text-align: center;
+#startText{
+  font-size:24px;
 }
 
-/* 🎁 3D GIFT */
-#giftBox {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
+/* 🎁 GIFT */
+#giftBox{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 
-.box {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  animation: bounce 1.5s infinite;
+.gift{
+  position:relative;
+  width:140px;
+  height:140px;
 }
 
-.body {
-  width: 100%;
-  height: 100%;
-  background: red;
-  border-radius: 10px;
-  position: absolute;
+/* BOX BODY */
+.box{
+  width:100%;
+  height:100%;
+  background:#e60023;
+  border-radius:10px;
+  position:absolute;
+  bottom:0;
 }
 
-.lid {
-  width: 110px;
-  height: 30px;
-  background: darkred;
-  position: absolute;
-  top: -25px;
-  left: -5px;
-  border-radius: 5px;
+/* LID */
+.lid{
+  width:100%;
+  height:40px;
+  background:#b8001c;
+  position:absolute;
+  top:-35px;
+  border-radius:6px;
+  transform-origin:bottom;
+  transition:1s;
 }
 
-@keyframes bounce {
-  50% { transform: translateY(-15px); }
+/* RIBBONS */
+.ribbon-vertical{
+  width:20px;
+  height:100%;
+  background:gold;
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  transition:1s;
+}
+
+.ribbon-horizontal{
+  height:20px;
+  width:100%;
+  background:gold;
+  position:absolute;
+  top:40%;
+  transition:1s;
+}
+
+/* OPEN ANIMATION */
+.gift.open .lid{
+  transform:rotateX(120deg);
+}
+
+.gift.open .ribbon-vertical{
+  transform:translateX(-50%) scaleY(0);
+}
+
+.gift.open .ribbon-horizontal{
+  transform:scaleX(0);
 }
 
 /* SLIDER */
-.slider {
-  height: 70vh;
-  position: relative;
+.slider{
+  height:70vh;
+  position:relative;
 }
 
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: 1s;
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:1s;
 }
 
-.slide.active {
-  opacity: 1;
+.slide.active{opacity:1;}
+
+/* ✍️ QUOTE */
+#quoteBox{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:20px;
+  font-size:26px;
+  text-align:center;
+  font-family:'Pacifico',cursive;
+  font-weight:bold;
+  background:linear-gradient(transparent,rgba(0,0,0,0.8));
 }
 
-/* ✍️ QUOTES ON IMAGE */
-#quoteBox {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 15px;
-  font-size: 22px;
-  text-align: center;
-  font-family: 'Pacifico', cursive;
-  font-weight: bold;
-  color: white;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+/* HEART */
+.heart{
+  position:fixed;
+  bottom:0;
+  animation:float 4s linear;
 }
-
-/* HEARTS */
-.heart {
-  position: fixed;
-  bottom: 0;
-  animation: floatUp 4s linear;
-}
-
-@keyframes floatUp {
-  to { transform: translateY(-100vh); opacity: 0; }
+@keyframes float{
+  to{transform:translateY(-100vh);opacity:0;}
 }
 
 /* FIREWORK */
-#fireworks {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+#fireworks{
+  position:fixed;
+  width:100%;
+  height:100%;
+  pointer-events:none;
 }
 
 /* FADE */
-#fadeScreen {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: black;
-  opacity: 0;
-  transition: 2s;
+#fadeScreen{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  opacity:0;
+  transition:2s;
 }
-#fadeScreen.show { opacity: 1; }
+#fadeScreen.show{opacity:1;}
